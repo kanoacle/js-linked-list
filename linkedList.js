@@ -5,4 +5,26 @@
  */
 function linkedListGenerator(){
 
+  return {
+
+    getHead: function () {
+      return this.data;
+    },
+
+    getTail: function () {},
+
+    add: function () {},
+
+    remove: function () {},
+
+    get: function () {},
+
+    insert: function () {},
+
+    data: null,
+
+    next: null
+  };
 }
+
+var list = linkedListGenerator();
