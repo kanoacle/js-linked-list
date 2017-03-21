@@ -82,6 +82,14 @@ function linkedListGenerator(){
       next: null
     };
 
+    if (get(x) === false) {
+      return false;
+
+    } else if (x < 0) {
+      return false;
+
+    }
+
     if (x === 0) {
       newNode.next = head;
       head = newNode;
