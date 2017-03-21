@@ -4,20 +4,19 @@ function linkedListGenerator(){
 
   var tail = null;
 
-  return {
-
-    getHead: function () {
+  function getHead () {
       return head;
-    },
+  }
 
-    getTail: function () {
+  function getTail () {
       return tail;
-    },
+  }
 
-    add: function (newNodeA) {
+  function add (newNodeA) {
       var newNode = {
           value: newNodeA,
           next: null
+
         };
 
       if (head === null) {
@@ -30,32 +29,95 @@ function linkedListGenerator(){
       }
 
       return newNode;
-    },
+  }
 
-    remove: function () {},
+  function remove (x) {
+    if (get(x) === false) {
+      return false;
 
-    get: function (x) {
-      if (head === null) {
-        return null;
+    }
+
+    if (x === 0) {
+      if (head === tail) {
+        head = null;
+
+      } else {
+        head = head.next;
+
       }
-      var current = head;
-      for (var i = 0; i < x; i++) {
-        if (current.next === null) {
-          return false;
+    }
+
+    var current = get(x - 1);
+
+      if (current.next === tail) {
+        if (current === head) {
+          return;
+        } else {
+          current.next = current.next.next;
+          tail = current;
         }
-          current = current.next;
+      } else {
+        current.next = current.next.next;
       }
-      return current;
-    },
+  }
 
-    insert: function () {}
+  function get (x) {
+    var current = head;
+
+    for (var i = 0; i < x; i++) {
+      if (current.next === null) {
+        return false;
+
+      }
+        current = current.next;
+
+    }
+
+      return current;
+  }
+
+  function insert (value, x) {
+    var newNode = {
+      value: value,
+      next: null
+    };
+
+    if (x === 0) {
+      newNode.next = head;
+      head = newNode;
+
+    } else {
+
+      var current = get(x - 1);
+
+      if (current === head) {
+        if (head === tail) {
+          head.next = newNode;
+
+        }
+          newNode.next = head.next;
+          head.next = newNode;
+
+      } else {
+        newNode.next = current.next;
+        current.next = newNode;
+
+      }
+    }
+  }
+
+  return {
+
+    getHead: getHead,
+
+    getTail: getTail,
+
+    add: add,
+
+    remove: remove,
+
+    get: get,
+
+    insert: insert
   };
 }
-var list = linkedListGenerator();
-list.add('news.ycombinator.com');
-list.add('mozilla.org');
-list.add('eff.org');
-list.add('icann.org');
-console.log(list.get(0));
-console.log(list.get(1));
-console.log(list.get(2));
